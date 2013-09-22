@@ -1,0 +1,32 @@
+<Window x:Class="SW.FileHashChecker.WPF.Host.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SW.FileHashChecker" Width="800" Height="600">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="110*"/>
+            <RowDefinition Height="110*"/>
+            <RowDefinition Height="213*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Browse for a file and check the hash." FontSize="18" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox HorizontalAlignment="Left" FontSize="18" Margin="87,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="540"/>
+        <Label Content="..." FontSize="18" BorderThickness="1" BorderBrush="DarkGray"  Margin="87,54,0,22" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Width="540"/>
+        <Label Content="File" HorizontalAlignment="Left" FontSize="18" Margin="20,2,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.372,0.935"/>
+        <Label Content="Hash" HorizontalAlignment="Left" FontSize="18" Margin="20,54,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.372,0.935"/>
+        <!-- Hash type combo box -->
+        <Label Content="Hash Type" Grid.Row="0" HorizontalAlignment="Left" FontSize="18" Margin="483,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.372,0.935"/>
+        <ComboBox Grid.Row="0" HorizontalAlignment="Left" Margin="581,30,0,0" FontSize="18" VerticalAlignment="Top" Width="142">
+            <ComboBoxItem>MD5</ComboBoxItem>
+            <ComboBoxItem>SHA1</ComboBoxItem>
+        </ComboBox>
+        <Button Content="Browse" FontSize="18" HorizontalAlignment="Left" Margin="648,9,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Browse" FontSize="18" HorizontalAlignment="Left" Margin="648,9,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+        <Label Content="..." FontSize="18" BorderThickness="1" BorderBrush="DarkGray"  Margin="87,10,0,67" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Width="540"/>
+        <Label Content="Hash" HorizontalAlignment="Left" FontSize="18" Margin="20,10,0,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="0.372,0.935"/>
+        <Button Content="Verify" FontSize="18" HorizontalAlignment="Left" Margin="648,16,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75"/>
+        
+    </Grid>
+
+</Window>

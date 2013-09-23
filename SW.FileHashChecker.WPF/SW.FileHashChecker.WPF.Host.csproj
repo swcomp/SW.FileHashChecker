@@ -63,10 +63,14 @@
     </Compile>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="IShell.cs" />
-    <Compile Include="Models\Md5HashModel.cs" />
+    <Compile Include="Services\Md5HashGenerator.cs" />
+    <Compile Include="Services\FileDialog.cs" />
     <Compile Include="Services\FileHashGenerator.cs" />
     <Compile Include="Services\FileSelector.cs" />
+    <Compile Include="Services\Interfaces\IFileDialog.cs" />
+    <Compile Include="Services\Interfaces\IFileHashGenerator.cs" />
     <Compile Include="Services\Interfaces\IFileSelector.cs" />
+    <Compile Include="Services\Sha1HashGenerator.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Page Include="ShellView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -108,6 +112,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\" />
   </ItemGroup>

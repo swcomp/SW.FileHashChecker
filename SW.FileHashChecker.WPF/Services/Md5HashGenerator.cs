@@ -3,14 +3,14 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace SW.FileHashChecker.WPF.Host.Models
+namespace SW.FileHashChecker.WPF.Host.Services
 {
 
-    internal class Md5HashModel
+    public class Md5HashGenerator
     {
         // Hash an input string and return the hash as 
         // a 32 character hexadecimal string. 
-        public static string getMd5Hash(FileStream fileStream)
+        public static string GetMd5Hash(FileStream fileStream)
         {
             // Create a new instance of the MD5CryptoServiceProvider object.
             MD5CryptoServiceProvider md5Hasher = new MD5CryptoServiceProvider();
@@ -18,7 +18,7 @@ namespace SW.FileHashChecker.WPF.Host.Models
             // Convert the input string to a byte array and compute the hash. 
             //byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(input));
             byte[] data = md5Hasher.ComputeHash(fileStream);
-
+            
             // Create a new Stringbuilder to collect the bytes 
             // and create a string.
             StringBuilder sBuilder = new StringBuilder();

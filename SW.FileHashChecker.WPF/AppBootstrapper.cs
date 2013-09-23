@@ -13,7 +13,7 @@ namespace SW.FileHashChecker.WPF.Host
 
 		public AppBootstrapper()
 		{
-			Start();
+			//Start();
 		}
 
 		protected override void Configure()

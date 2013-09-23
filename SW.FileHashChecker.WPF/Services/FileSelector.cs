@@ -16,14 +16,17 @@ namespace SW.FileHashChecker.WPF.Host.Services.Filesystem
     /// </summary>
     public class FileSelector : IFileSelector
     {
-        private OpenFileDialog _openFileDialog;
+        private IFileDialog _fileDialog;
 
         private static volatile FileSelector _instance;
         private static object syncRoot = new Object();
                 
         private FileSelector()
         {
-            InitOpenFileDialog();
+            // TODO: IoC constructor injection, check on intented use in Caliburn.Micro though as was only designed to be used in framework
+            // code, not application code.
+            _fileDialog = new FileDialog();
+            _fileDialog.FileSelected += OnFileSelected;            
         }
         
         public static FileSelector Instance 
@@ -41,31 +44,38 @@ namespace SW.FileHashChecker.WPF.Host.Services.Filesystem
                 
                 return _instance;
             }
-        } 
-
-        protected void InitOpenFileDialog()
-        {
-
-            _openFileDialog = new OpenFileDialog();
-            _openFileDialog.Filter = "All files (*.*)|*.*"; // Filter files by extension.
-            _openFileDialog.FileOk += OnFileSelected;
-
         }
 
+        /// <summary>
+        /// When user selects a file create a filestream object as required for hash generation.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnFileSelected(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Create a fileStream for the file.
-            SelectedFile = new FileStream(((OpenFileDialog)sender).FileName, FileMode.Open, FileAccess.Read);  //fInfo.Open(FileMode.Open);
-            // Be sure it's positioned to the beginning of the stream. 
-            SelectedFile.Position = 0;
+            try
+            {
+                // Create a fileStream for the file.
+                SelectedFile = new FileStream(((OpenFileDialog)sender).FileName, FileMode.Open, FileAccess.Read);  //fInfo.Open(FileMode.Open);
+                // Be sure it's positioned to the beginning of the stream. 
+                SelectedFile.Position = 0;
+            }
+            catch (DirectoryNotFoundException)
+            {
+                Console.WriteLine("Error: The directory specified could not be found.");
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("Error: A file in the directory could not be accessed.");
+            }
         }
 
         public FileStream SelectedFile { get; private set; }
 
-        public OpenFileDialog OpenFileDialog
+        public IFileDialog FileDialog
         {
-            get { return _openFileDialog; }
-            set { _openFileDialog = value; }
+            get { return _fileDialog; }
+            set { _fileDialog = value; }
         }
     }
 }

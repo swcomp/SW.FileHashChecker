@@ -39,7 +39,7 @@ namespace SW.FileHashChecker.WPF.Host {
                 //dlg = new Microsoft.Win32.OpenFileDialog();
                 //dlg.FileName = "Document"; // Default file name
                 //dlg.DefaultExt = ".txt"; // Default file extension
-                dlg.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*"; // Filter files by extension 
+                dlg.Filter = "All files (*.*)|*.*"; // Filter files by extension 
 
                 // Show open file dialog box
                 Nullable<bool> result = dlg.ShowDialog();

@@ -1,5 +1,8 @@
-﻿using NUnit.Framework;
+﻿using Caliburn.Micro;
+using NUnit.Framework;
 using SW.FileHashChecker.WPF.Host;
+using SW.FileHashChecker.WPF.Host.Services.Filesystem;
+using SW.FileHashChecker.WPF.Host.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,18 +25,18 @@ namespace SW.FileHashChecker.UnitTests.SW.FileHashChecker.WPF.Host
     public class and_browsing_to_select_a_file_to_check :
                 when_working_with_the_file_hash_checker
     {
-        ShellViewModel _vm;
+        IFileSelector _fileSelector;
 
         [SetUp]
         public void Init()
         {
-            _vm = new ShellViewModel();
+            _fileSelector = FileSelector.Instance; //IoC.Get<IFileSelector>();
         }
 
         [Test]
         public void then_a_valid_win32_file_dialog_should_be_opened()
         {
-            var dlg = _vm.GetOpenFileDialog();
+            var dlg = _fileSelector.OpenFileDialog;
 
             Assert.That(dlg, Is.InstanceOf<Microsoft.Win32.OpenFileDialog>());
 
@@ -42,11 +45,12 @@ namespace SW.FileHashChecker.UnitTests.SW.FileHashChecker.WPF.Host
         [Test]
         public void then_on_file_selection_a_valid_filestream_object_should_be_returned()
         {
-            var dlg = _vm.GetOpenFileDialog();
+            var dlg = _fileSelector.OpenFileDialog;
+            dlg.ShowDialog();
             // Note: Here the file handle is returned to _vm from the dialog.
             // Mock the file handle here.
             string fh = "filePathHere";
-            var fso = _vm.GetSelectedFile(fh);
+            var fso = _fileSelector.SelectedFile;
 
             Assert.That(fso, Is.InstanceOf<FileStream>());
         }

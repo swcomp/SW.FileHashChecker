@@ -3,6 +3,9 @@ namespace SW.FileHashChecker.WPF.Host
 	using System;
 	using System.Collections.Generic;
 	using Caliburn.Micro;
+    using SW.FileHashChecker.WPF.Host.Services.Filesystem;
+    using SW.FileHashChecker.WPF.Host.Services;
+    using SW.FileHashChecker.WPF.Host.Services.Interfaces;
 
     public class AppBootstrapper : BootstrapperBase
 	{
@@ -20,6 +23,10 @@ namespace SW.FileHashChecker.WPF.Host
 			container.Singleton<IWindowManager, WindowManager>();
 			container.Singleton<IEventAggregator, EventAggregator>();
 			container.PerRequest<IShell, ShellViewModel>();
+
+            // Services registrations.
+            container.Singleton<IFileSelector, FileSelector>();
+            container.Singleton<FileHashGenerator>();
 		}
 
 		protected override object GetInstance(Type service, string key)
@@ -43,7 +50,7 @@ namespace SW.FileHashChecker.WPF.Host
 
         protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
-            DisplayRootViewFor<IShell>();
+            DisplayRootViewFor<IShell>();            
         }
 	}
 }

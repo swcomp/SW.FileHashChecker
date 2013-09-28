@@ -3,6 +3,10 @@ using System.IO;
 using System.Security.Cryptography;
 
 namespace SW.FileHashChecker.WPF.Host {
+    
+    /// <summary>
+    /// TODO: Make into a screen conductor for common menu etc and then user controls for individual screens.
+    /// </summary>
     public class ShellViewModel : IShell
     {
 
